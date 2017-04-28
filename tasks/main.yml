@@ -1,13 +1,26 @@
 ---
 
-- name: Install Exim4 package
+- name: Install Exim4 package and ssl-cert
   action: apt
   args:
-    name: "{{ exim4_package_name }}"
+    name: "{{ item }}"
     state: present
+  with_items:
+    - "{{ exim4_package_name }}"
+    - ssl-cert
   tags:
     - packages
     - exim4
+
+- name: Configure /etc/mailname
+  action: template
+  args:
+    src: mailname.j2
+    dest: /etc/mailname
+  notify: update exim4.conf
+  tags:
+    - exim4
+    - exim4-reconfigure
 
 - name: Configure update-exim4.conf.conf
   action: template

@@ -1,6 +1,7 @@
 ---
 
 exim4_package_name: exim4-daemon-light  # exim4-daemon-heavy
+exim4_mailname: "{{ ansible_nodename }}"
 
 exim4_dc_eximconfig_configtype: internet
 exim4_dc_other_hostnames: "{{ ansible_hostname }}"
