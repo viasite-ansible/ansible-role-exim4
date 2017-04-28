@@ -1,0 +1,16 @@
+---
+driver:
+  name: docker
+docker:
+  containers:
+    - name: ansible-role-drupal-scripts-1604
+      image: ubuntu
+      image_version: 16.04
+      volume_mounts:
+        - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
+
+ansible:
+  playbook: tests/playbook.yml
+  group_vars:
+    all:
+      exim4_dkim_enable: yes

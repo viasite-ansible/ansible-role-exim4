@@ -1,7 +1,7 @@
 Ansible Role: Exim4
 ===================
 
-[![Build Status](https://travis-ci.org/degtyarevalexey/ansible-role-exim4.svg?branch=master)](https://travis-ci.org/degtyarevalexey/ansible-role-exim4)
+[![Build Status](https://travis-ci.org/viasite-ansible/ansible-role-exim4.svg?branch=master)](https://travis-ci.org/viasite-ansible/ansible-role-exim4)
 
 Ansbile role to install and configure Exim4 on Debian or Ubuntu system.
 
