@@ -1,10 +1,19 @@
 ---
 
+- name: "Ensure {{ exim4_dkim_keys_path }} exists"
+  action: file
+  args:
+    path: "{{ exim4_dkim_keys_path }}"
+    state: directory
+    owner: Debian-exim
+    group: Debian-exim
+    mode: 0700
+
 - name: Generate DKIM private key
   command: openssl genrsa -out dkim.private {{ exim4_dkim_keysize }} -outform PEM
   args:
-    chdir: /etc/exim4
-    creates: /etc/exim4/dkim.private
+    chdir: "{{ exim4_dkim_keys_path }}"
+    creates: "{{ exim4_dkim_keys_path }}/dkim.private"
   notify: reload exim4
   tags:
     - exim4
@@ -13,8 +22,8 @@
 - name: Setup DKIM public key
   command: openssl rsa -in dkim.private -out dkim.public -pubout -outform PEM
   args:
-    chdir: /etc/exim4
-    creates: /etc/exim4/dkim.public
+    chdir: "{{ exim4_dkim_keys_path }}"
+    creates: "{{ exim4_dkim_keys_path }}/dkim.public"
   notify: reload exim4
   tags:
     - exim4
@@ -28,9 +37,9 @@
     group: Debian-exim
     mode: "{{ item.mode }}"
   with_items:
-    - name: /etc/exim4/dkim.private
+    - name: "{{ exim4_dkim_keys_path }}/dkim.private"
       mode: 640
-    - name: /etc/exim4/dkim.public
+    - name: "{{ exim4_dkim_keys_path }}/dkim.public"
       mode: 644
   ignore_errors: "{{ ansible_check_mode }}"
   tags:

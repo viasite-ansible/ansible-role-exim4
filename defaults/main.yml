@@ -1,7 +1,7 @@
 ---
 
 exim4_package_name: exim4-daemon-light  # exim4-daemon-heavy
-exim4_mailname: "{{ ansible_nodename }}"
+exim4_mailname: "{{ ansible_fqdn }}"
 
 exim4_dc_eximconfig_configtype: internet
 exim4_dc_other_hostnames: "{{ ansible_hostname }}"
@@ -17,10 +17,11 @@ exim4_dc_hide_mailname: ''
 exim4_dc_mailname_in_oh: 'true'
 exim4_dc_localdelivery: 'mail_spool'
 
-exim4_dkim_enable: false
+exim4_dkim_enable: false # only for global DKIM
 exim4_dkim_keysize: 2048
 exim4_dkim_canon: relaxed
 exim4_dkim_selector: dkim
+exim4_dkim_keys_path: /etc/exim4/dkim
 
 exim4_conf_keyvalue: false
 exim4_conf_values: false
