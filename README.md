@@ -14,14 +14,14 @@ Download a role onto your Ansible host using the ansible-galaxy command that
 comes bundled with Ansible.
 
 ```shell
-$ ansible-galaxy install degtyarevalexey.exim4
+$ ansible-galaxy install adegtyarev.exim4
 ```
 
 Define a role in your playbook and setup desired options.  For example:
 
 ```yaml
 roles:
-  - role: degtyarevalexey.exim4
+  - role: adegtyarev.exim4
 ```
 
 The defaults installs `exim4-daemon-light` package and no additional
